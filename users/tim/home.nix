@@ -33,10 +33,9 @@
   ];
 
   programs.zsh = {
-    enable = true;
-    
-   enableAutosuggestions = true;
-
+    enable = true; 
+    enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
     shellAliases = {
       ll = "ls -l";
       update = "sudo nixos-rebuild switch";
@@ -58,4 +57,9 @@
     userEmail = "tim.horlacher@protonmail.com";
   };
 
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+  };
 }
