@@ -6,10 +6,17 @@
 
 {
   imports = [ 
-      <nixos-hardware/dell/xps/13-9360> 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+
+  # Enable nix flakes
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -25,7 +32,7 @@
   boot.initrd.luks.devices."luks-bb5d84da-b8b0-4393-aafa-8b39f9dc862a".device = "/dev/disk/by-uuid/bb5d84da-b8b0-4393-aafa-8b39f9dc862a";
   boot.initrd.luks.devices."luks-bb5d84da-b8b0-4393-aafa-8b39f9dc862a".keyFile = "/crypto_keyfile.bin";
 
-  networking.hostName = "xps13-nixos"; # Define your hostname.
+  networking.hostName = "xps13"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -51,20 +58,6 @@
     LC_PAPER = "de_DE.utf8";
     LC_TELEPHONE = "de_DE.utf8";
     LC_TIME = "de_DE.utf8";
-  };
-
-  # Hardware acceleration
-  nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-  };
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      # intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
   };
 
   # Enable the X11 windowing system.

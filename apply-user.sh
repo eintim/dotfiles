@@ -1,4 +1,5 @@
 #!/bin/sh
 pushd ~/nixos-config
-home-manager switch -f ./users/tim/home.nix
+nix build .#homeManagerConfigurations.tim.activationPackage
+./result/activate
 popd
