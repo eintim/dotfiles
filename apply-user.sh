@@ -1,5 +1,4 @@
 #!/bin/sh
 pushd ~/nixos-config
-nix build .#homeManagerConfigurations.tim.activationPackage
-./result/activate
+home-manager switch --flake .#tim
 popd

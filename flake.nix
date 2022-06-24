@@ -20,8 +20,8 @@
     lib = nixpkgs.lib;
 
   in {
-    homeManagerConfigurations = {
-      tim = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations = {
+      "tim" = home-manager.lib.homeManagerConfiguration {
         inherit system pkgs;
 	stateVersion = "22.05";
 	username = "tim";
