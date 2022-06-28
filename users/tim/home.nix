@@ -30,6 +30,8 @@
     mpv
     streamlink
     zsh
+    obs-studio
+    libreoffice-fresh
   ];
 
   programs.zsh = {
