@@ -115,10 +115,13 @@
     wget
     git
     zsh
-    google-chrome
     firefox
     gnome.gnome-tweaks
   ];
+
+  environment.sessionVariables = {
+    MOZ_DISABLE_RDD_SANDBOX= "1";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
