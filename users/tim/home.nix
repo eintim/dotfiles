@@ -32,6 +32,7 @@
     zsh
     obs-studio
     libreoffice-fresh
+    minecraft
   ];
 
   programs.zsh = {
