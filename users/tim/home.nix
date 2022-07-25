@@ -66,6 +66,15 @@
     vimAlias = true;
   };
 
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode;
+    mutableExtensionsDir = false;
+    extensions = with pkgs.vscode-extensions; [
+      bbenoist.nix
+    ];
+  };
+
   xdg.configFile."mpv/mpv.conf".text = ''
     hwdec=auto-safe
     vo=gpu
