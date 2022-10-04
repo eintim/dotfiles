@@ -73,6 +73,8 @@
     xkbVariant = "";
   };
 
+  services.flatpak.enable = true;
+
   # Configure console keymap
   console.keyMap = "de";
 
@@ -117,6 +119,7 @@
     zsh
     firefox
     gnome.gnome-tweaks
+    neofetch
   ];
 
   environment.sessionVariables = {

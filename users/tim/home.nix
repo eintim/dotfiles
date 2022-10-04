@@ -33,6 +33,8 @@
     obs-studio
     libreoffice-fresh
     minecraft
+    cura
+    blender
   ];
 
   programs.zsh = {
