@@ -35,6 +35,9 @@
     minecraft
     cura
     blender
+    teams
+    unityhub
+    rstudio
   ];
 
   programs.zsh = {

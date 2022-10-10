@@ -105,7 +105,7 @@
   users.users.tim = {
     isNormalUser = true;
     description = "Tim Horlacher";
-    extraGroups = [ "networkmanager" "wheel" "dialout" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "docker"];
   };
 
   # Allow unfree packages
@@ -125,6 +125,8 @@
   environment.sessionVariables = {
     MOZ_DISABLE_RDD_SANDBOX= "1";
   };
+
+  virtualisation.docker.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
