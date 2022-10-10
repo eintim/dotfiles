@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports =
+    (import ../modules/study) ++
+    (import ../modules/hobbies);
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "tim";
@@ -23,21 +27,14 @@
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
-    betaflight-configurator
     keepassxc
     discord
     element-desktop
     mpv
     streamlink
     zsh
-    obs-studio
     libreoffice-fresh
     minecraft
-    cura
-    blender
-    teams
-    unityhub
-    rstudio
   ];
 
   programs.zsh = {
@@ -55,7 +52,7 @@
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" ];
-      theme = "robbyrussell";
+      theme = "afowler";
     };
   };
 
