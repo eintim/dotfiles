@@ -24,7 +24,7 @@
   programs.home-manager.enable = true;
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true; 
 
   home.packages = with pkgs; [
     keepassxc
@@ -36,6 +36,9 @@
     libreoffice-fresh
     minecraft
   ];
+
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
 
   programs.zsh = {
     enable = true; 
