@@ -122,13 +122,21 @@
     firefox
     gnome.gnome-tweaks
     neofetch
+    virt-manager
   ];
 
   environment.sessionVariables = {
     MOZ_DISABLE_RDD_SANDBOX= "1";
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+    virtualbox ={
+      host.enable = true;
+      host.enableExtensionPack = true;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -137,6 +145,7 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+  programs.dconf.enable = true;
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
   # List services that you want to enable:

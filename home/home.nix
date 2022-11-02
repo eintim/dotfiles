@@ -35,6 +35,7 @@
     zsh
     libreoffice-fresh
     minecraft
+    vagrant
   ];
 
   programs.direnv.enable = true;
