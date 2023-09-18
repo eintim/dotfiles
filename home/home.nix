@@ -10,6 +10,7 @@
   home.username = "tim";
   home.homeDirectory = "/home/tim";
 
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -18,7 +19,7 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "22.05";
+  home.stateVersion = "23.05";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -29,22 +30,37 @@
   home.packages = with pkgs; [
     keepassxc
     discord
+    webcord
     element-desktop
     mpv
     streamlink
     zsh
     libreoffice-fresh
-    minecraft
-    vagrant
+    prismlauncher
+    ansible
+    dolphin-emu-beta
+    zoom-us
+    python38
+    obsidian
+    teams
+    signal-desktop-beta
+    teamspeak5_client
+    android-tools
   ];
+
+  home.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = 1;
+  };
+  
+  services.syncthing.enable = true;
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
-
+  programs.go.enable = true;
   programs.zsh = {
     enable = true; 
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
     shellAliases = {
       ll = "ls -l";
       update = "sudo nixos-rebuild switch";
@@ -75,7 +91,7 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
-    mutableExtensionsDir = false;
+    mutableExtensionsDir = true;
     extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
     ];

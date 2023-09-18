@@ -20,10 +20,12 @@
     '';
   };
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.supportedFilesystems = [ "ntfs" ];
 
   # Setup keyfile
   boot.initrd.secrets = {
@@ -43,6 +45,23 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  # WireGuard Stuff
+  networking.firewall = {
+    allowedTCPPorts = [ 1883 ];
+    checkReversePath = "loose";
+    # if packets are still dropped, they will show up in dmesg
+    logReversePathDrops = true;
+    # wireguard trips rpfilter up
+    extraCommands = ''
+     ip46tables -t mangle -I nixos-fw-rpfilter -p udp -m udp --sport 51820 -j RETURN
+     ip46tables -t mangle -I nixos-fw-rpfilter -p udp -m udp --dport 51820 -j RETURN
+    '';
+    extraStopCommands = ''
+     ip46tables -t mangle -D nixos-fw-rpfilter -p udp -m udp --sport 51820 -j RETURN || true
+     ip46tables -t mangle -D nixos-fw-rpfilter -p udp -m udp --dport 51820 -j RETURN || true
+    '';
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -100,6 +119,17 @@
     #media-session.enable = true;
   };
 
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gnome
+        xdg-desktop-portal-wlr
+
+      ];
+    };
+};
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -119,10 +149,12 @@
     wget
     git
     zsh
-    firefox
+    firefox-wayland
     gnome.gnome-tweaks
     neofetch
     virt-manager
+    wireguard-tools 
+    
   ];
 
   environment.sessionVariables = {
@@ -132,10 +164,6 @@
   virtualisation = {
     docker.enable = true;
     libvirtd.enable = true;
-    virtualbox ={
-      host.enable = true;
-      host.enableExtensionPack = true;
-    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are
