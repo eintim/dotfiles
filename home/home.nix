@@ -1,9 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    (import ../modules/study) ++
-    (import ../modules/hobbies);
+  imports = [
+    ./hypr
+    ./waybar
+    ./nwg-shell
+    ./r
+  ];
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -29,7 +32,6 @@
 
   home.packages = with pkgs; [
     keepassxc
-    discord
     webcord
     element-desktop
     mpv
@@ -39,14 +41,37 @@
     prismlauncher
     ansible
     dolphin-emu-beta
+    obs-studio
     zoom-us
     python38
-    obsidian
-    teams
+    #obsidian
     signal-desktop-beta
     teamspeak5_client
     android-tools
+    qbittorrent
+    platformio
+    avrdude
   ];
+
+  gtk = {
+    enable = true;
+    cursorTheme = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
+    };
+    theme = {
+      package = pkgs.adw-gtk3;
+      name = "adw-gtk3-dark";
+    };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+    style.name = "adwaita-dark";
+    style.package = pkgs.adwaita-qt;
+  };
+
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
@@ -102,4 +127,5 @@
     vo=gpu
     profile=gpu-hq
   '';
+
 }

@@ -84,9 +84,15 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.sddm = {
+    enable = true;
+    theme = "${import ./sddm-theme.nix {inherit pkgs;}}";
+  };
+  services.xserver.windowManager = {
+    bspwm.enable = true;
+    i3.enable = true;
+    dwm.enable = true;
+  };
 
   # Configure keymap in X11
   services.xserver = {
@@ -95,6 +101,13 @@
   };
 
   services.flatpak.enable = true;
+
+  services.devmon.enable = true;
+  services.udisks2.enable = true;
+  services.gvfs.enable = true;
+
+  services.blueman.enable = true;
+  hardware.bluetooth.enable = true;
 
   # Configure console keymap
   console.keyMap = "de";
@@ -111,6 +124,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
@@ -119,17 +133,6 @@
     #media-session.enable = true;
   };
 
-  xdg = {
-    portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gnome
-        xdg-desktop-portal-wlr
-
-      ];
-    };
-};
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -137,7 +140,7 @@
   users.users.tim = {
     isNormalUser = true;
     description = "Tim Horlacher";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "docker"];
+    extraGroups = [ "video" "networkmanager" "wheel" "dialout" "docker" "adbusers"];
   };
 
   # Allow unfree packages
@@ -150,11 +153,34 @@
     git
     zsh
     firefox-wayland
-    gnome.gnome-tweaks
     neofetch
     virt-manager
     wireguard-tools 
-    
+    kitty
+    alacritty
+    rofi-wayland
+    waybar
+    dunst
+    swww
+    libnotify
+    networkmanagerapplet
+    swaylock-effects
+    wlogout
+    pavucontrol
+    swayosd
+    libsForQt5.qt5.qtquickcontrols2
+    libsForQt5.qt5.qtgraphicaleffects
+    xfce.thunar
+    grim
+    slurp
+    wl-clipboard
+  ];
+
+  fonts.packages = with pkgs; [
+    # Nerd fonts
+    nerdfonts
+    meslo-lgs-nf
+    font-awesome
   ];
 
   environment.sessionVariables = {
@@ -173,8 +199,18 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
+  programs.hyprland.enable = true;
   programs.dconf.enable = true;
   programs.zsh.enable = true;
+  programs.light.enable = true;
+  programs.adb.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
   users.defaultUserShell = pkgs.zsh;
   # List services that you want to enable:
 
@@ -187,6 +223,18 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+
+  security.pam.services.swaylock = { };
+  services.udev.packages = [ 
+    pkgs.platformio
+    pkgs.platformio-core.udev
+    pkgs.openocd
+    pkgs.android-udev-rules
+  ];
+
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
+  '';
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leavecatenate(variables, "bootdev", bootdev)
