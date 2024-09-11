@@ -2,10 +2,7 @@
 
 {
   imports = [
-    ./hypr
-    ./waybar
-    ./nwg-shell
-    ./r
+    
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -32,6 +29,7 @@
 
   home.packages = with pkgs; [
     keepassxc
+    distrobox
     webcord
     element-desktop
     mpv
@@ -43,8 +41,8 @@
     dolphin-emu-beta
     obs-studio
     zoom-us
-    python38
-    #obsidian
+    heroic
+    obsidian
     signal-desktop-beta
     teamspeak5_client
     android-tools
@@ -67,7 +65,7 @@
 
   qt = {
     enable = true;
-    platformTheme = "gtk";
+    platformTheme.name = "gtk";
     style.name = "adwaita-dark";
     style.package = pkgs.adwaita-qt;
   };
@@ -84,7 +82,7 @@
   programs.go.enable = true;
   programs.zsh = {
     enable = true; 
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
       ll = "ls -l";

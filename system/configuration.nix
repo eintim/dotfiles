@@ -83,11 +83,9 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
-  services.xserver.displayManager.sddm = {
-    enable = true;
-    theme = "${import ./sddm-theme.nix {inherit pkgs;}}";
-  };
   services.xserver.windowManager = {
     bspwm.enable = true;
     i3.enable = true;
@@ -95,9 +93,9 @@
   };
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "de";
-    xkbVariant = "";
+    variant = "";
   };
 
   services.flatpak.enable = true;
@@ -116,7 +114,6 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -158,22 +155,6 @@
     wireguard-tools 
     kitty
     alacritty
-    rofi-wayland
-    waybar
-    dunst
-    swww
-    libnotify
-    networkmanagerapplet
-    swaylock-effects
-    wlogout
-    pavucontrol
-    swayosd
-    libsForQt5.qt5.qtquickcontrols2
-    libsForQt5.qt5.qtgraphicaleffects
-    xfce.thunar
-    grim
-    slurp
-    wl-clipboard
   ];
 
   fonts.packages = with pkgs; [
@@ -188,7 +169,16 @@
   };
 
   virtualisation = {
-    docker.enable = true;
+    # docker.enable = true;
+    podman = {
+      enable = true;
+
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = true;
+
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
+    };
     libvirtd.enable = true;
   };
 
@@ -201,6 +191,7 @@
   # };
 
   programs.hyprland.enable = true;
+
   programs.dconf.enable = true;
   programs.zsh.enable = true;
   programs.light.enable = true;
@@ -212,6 +203,7 @@
   };
 
   users.defaultUserShell = pkgs.zsh;
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
@@ -222,7 +214,6 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
 
   security.pam.services.swaylock = { };
   services.udev.packages = [ 
@@ -235,6 +226,25 @@
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
   '';
+
+  boot.extraModprobeConfig = ''
+    options snd slots=snd-hda-intel
+  '';
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged 
+    # programs here, NOT in environment.systemPackages
+  ];
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+        extraPackages = with pkgs; [
+        intel-compute-runtime
+    ];
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leavecatenate(variables, "bootdev", bootdev)
