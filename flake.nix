@@ -36,6 +36,13 @@
           ./system/configuration.nix
 	      ];
       };
+
+      vm = lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./system/vm/configuration.nix
+        ];
+      };
     };
   };
 }
