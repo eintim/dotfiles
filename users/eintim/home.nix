@@ -40,4 +40,7 @@
     userName  = "eintim";
     userEmail = "tim.horlacher@protonmail.com";
   };
+
+  # Niri Wayland compositor config (VM session at GDM)
+  xdg.configFile."niri/config.kdl".source = ./niri-config.kdl;
 }
