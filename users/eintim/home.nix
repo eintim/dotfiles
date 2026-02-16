@@ -12,6 +12,11 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  home.packages = with pkgs; [
+    codex
+    claude-code
+  ];
+
   programs.git = {
     enable = true;
     userName  = "eintim";
