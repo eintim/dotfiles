@@ -17,6 +17,24 @@
     claude-code
   ];
 
+  programs.zsh = {
+    enable = true; 
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    shellAliases = {
+      ll = "ls -l";
+    };
+    history = {
+      size = 10000;
+      path = "${config.xdg.dataHome}/zsh/history";
+    };
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" ];
+      theme = "afowler";
+    };
+  };
+
   programs.git = {
     enable = true;
     userName  = "eintim";
