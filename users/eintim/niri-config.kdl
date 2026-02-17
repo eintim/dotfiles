@@ -7,7 +7,13 @@ input {
     }
 }
 
-spawn-at-startup "nm-applet --indicator"
+output "Virtual-1" {
+    scale 1.5
+}
+
+spawn-at-startup "nm-applet" "--indicator"
+spawn-at-startup "waybar"
+spawn-at-startup "swaybg" "-i" "/home/eintim/.config/niri/wallpaper.png" "-m" "fill"
 
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }

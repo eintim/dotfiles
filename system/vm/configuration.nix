@@ -29,6 +29,8 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+  # Start ibus for Wayland sessions (including niri) and export IM vars.
+  i18n.inputMethod.enabled = "ibus";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "de_DE.UTF-8";
@@ -60,6 +62,8 @@
 
   services.vmwareGuest.enable = true;
 
+  programs.zsh.enable = true;
+
   # Configure console keymap
   console.keyMap = "de";
 
@@ -90,6 +94,7 @@
     isNormalUser = true;
     description = "Tim Horlacher";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
     packages = with pkgs; [
     #  thunderbird
     ];
