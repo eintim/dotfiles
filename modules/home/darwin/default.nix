@@ -1,9 +1,34 @@
 { config, pkgs, ... }:
 {
+  imports = [
+    ../programs/neovim.nix
+  ];
+
   home.packages = with pkgs; [
+    autoconf
+    autoconf-archive
+    automake
+    bash
+    btop
+    ccache
+    cmake
+    fastfetch
+    gh
+    gource
+    jujutsu
+    lazygit
+    luarocks
+    mpv
+    nasm
+    ninja
+    p7zip
     ripgrep
+    starship
+    tio
     jq
     tmux
+    typst
+    unar
   ];
 
   programs.zsh = {
@@ -37,7 +62,7 @@
 
     initContent = ''
       # `brew shellenv` in .zprofile resets PATH, so restore all Nix profiles.
-      export PATH="$HOME/.nix-profile/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:$PATH"
+      export PATH="$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:$PATH"
 
       export NVM_DIR="$HOME/.nvm"
       if [[ -s "$NVM_DIR/nvm.sh" ]]; then
