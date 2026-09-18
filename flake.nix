@@ -3,8 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -12,51 +14,44 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, home-manager, nixos-hardware, nix-darwin, ... }:
-  let
-    system = "x86_64-linux";
-
-    pkgs = import nixpkgs {
-      inherit system;
-      config = { allowUnfree = true; };
-    };
-
-    lib = nixpkgs.lib;
-
-  in {
-    homeConfigurations."eintim@macbook" = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs {
-        system = "aarch64-darwin";
-        config.allowUnfree = true;
-      };
-      modules = [ ./home/darwin ];
-    };
-
-    darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
-      modules = [ ./darwin/configuration.nix ];
-    };
-
-    packages.aarch64-darwin = {
-      home-manager = home-manager.packages.aarch64-darwin.home-manager;
-      darwin-rebuild = nix-darwin.packages.aarch64-darwin.darwin-rebuild;
-    };
-
-    homeConfigurations.tim = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+  outputs =
+    inputs@{
+      home-manager,
+      nix-darwin,
+      nixpkgs,
+      ...
+    }:
+    let
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ];
+    in
+    {
+      nixosConfigurations.xps13 = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
         modules = [
-          ./home/home.nix
+          home-manager.nixosModules.home-manager
+          ./hosts/xps13
         ];
-    };
-
-    nixosConfigurations = {
-      xps13 = lib.nixosSystem {
-        inherit system;
-
-	      modules = [
-	        nixos-hardware.nixosModules.dell-xps-13-9360
-          ./system/configuration.nix
-	      ];
       };
+
+      darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          home-manager.darwinModules.home-manager
+          ./hosts/macbook
+        ];
+      };
+
+      devShells.x86_64-linux.r-gifski = import ./dev-shells/r-gifski.nix {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      };
+
+      packages.x86_64-linux.sddm-theme = import ./packages/sddm-theme.nix {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      };
+
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
     };
-  };
 }

@@ -1,33 +1,13 @@
 { config, pkgs, ... }:
 {
-  home.username = "eintim";
-  home.homeDirectory = "/Users/eintim";
-  home.stateVersion = "26.05";
-  programs.home-manager.enable = true;
-
   home.packages = with pkgs; [
     ripgrep
     jq
     tmux
   ];
 
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "Tim Horlacher";
-        email = "tim.horlacher@protonmail.com";
-      };
-      init.defaultBranch = "main";
-      core.autocrlf = "input";
-    };
-  };
-
   programs.zsh = {
-    enable = true;
     dotDir = config.home.homeDirectory;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
     history = {
       path = "${config.home.homeDirectory}/.zsh_history";
       size = 50000;
@@ -39,11 +19,7 @@
       share = true;
     };
     setOptions = [ "HIST_VERIFY" ];
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" ];
-      theme = "robbyrussell";
-    };
+    oh-my-zsh.theme = "robbyrussell";
 
     envExtra = ''
       if [[ -r "$HOME/.cargo/env" ]]; then
