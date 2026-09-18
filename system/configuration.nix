@@ -12,12 +12,12 @@
 
   # Enable nix flakes
   nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-      keep-outputs = true
-      keep-derivations = true
-    '';
+    package = pkgs.nix;
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      keep-outputs = true;
+      keep-derivations = true;
+    };
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -83,8 +83,8 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   services.xserver.windowManager = {
     bspwm.enable = true;
@@ -114,7 +114,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -149,18 +149,20 @@
     wget
     git
     zsh
-    firefox-wayland
-    neofetch
+    firefox
+    fastfetch
     virt-manager
     wireguard-tools 
     kitty
     alacritty
+    brightnessctl
+    android-tools
   ];
 
   fonts.packages = with pkgs; [
     # Nerd fonts
-    nerdfonts
-    meslo-lgs-nf
+    nerd-fonts.meslo-lg
+    nerd-fonts.symbols-only
     font-awesome
   ];
 
@@ -194,8 +196,6 @@
 
   programs.dconf.enable = true;
   programs.zsh.enable = true;
-  programs.light.enable = true;
-  programs.adb.enable = true;
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -220,7 +220,6 @@
     pkgs.platformio
     pkgs.platformio-core.udev
     pkgs.openocd
-    pkgs.android-udev-rules
   ];
 
   services.udev.extraRules = ''

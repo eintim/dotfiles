@@ -35,16 +35,16 @@
     mpv
     streamlink
     zsh
-    libreoffice-fresh
+    libreoffice
     prismlauncher
     ansible
-    dolphin-emu-beta
+    dolphin-emu
     obs-studio
     zoom-us
     heroic
     obsidian
-    signal-desktop-beta
-    teamspeak5_client
+    signal-desktop
+    teamspeak6-client
     android-tools
     qbittorrent
     platformio
@@ -53,6 +53,7 @@
 
   gtk = {
     enable = true;
+    gtk4.theme = config.gtk.theme;
     cursorTheme = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
@@ -65,7 +66,7 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "gtk";
+    platformTheme.name = "gtk3";
     style.name = "adwaita-dark";
     style.package = pkgs.adwaita-qt;
   };
@@ -101,21 +102,25 @@
 
   programs.git = {
     enable = true;
-    userName  = "eintim";
-    userEmail = "tim.horlacher@protonmail.com";
+    settings.user = {
+      name = "eintim";
+      email = "tim.horlacher@protonmail.com";
+    };
   };
 
   programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
+    withRuby = true;
+    withPython3 = true;
   };
 
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
     mutableExtensionsDir = true;
-    extensions = with pkgs.vscode-extensions; [
+    profiles.default.extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
     ];
   };
