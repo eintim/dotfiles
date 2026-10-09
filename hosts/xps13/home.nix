@@ -14,14 +14,8 @@
   programs.home-manager.enable = true;
 
   programs.zsh = {
-    shellAliases = {
-      ll = "ls -l";
-      update = "sudo nixos-rebuild switch --flake ~/dev/dotfiles#xps13";
-    };
-    history = {
-      size = 10000;
-      path = "${config.xdg.dataHome}/zsh/history";
-    };
+    shellAliases.update = "sudo nixos-rebuild switch --flake ~/dev/dotfiles#xps13";
+    history.path = "${config.xdg.dataHome}/zsh/history";
     oh-my-zsh.theme = "afowler";
   };
 }

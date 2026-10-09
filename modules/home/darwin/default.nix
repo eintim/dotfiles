@@ -20,17 +20,7 @@
 
   programs.zsh = {
     dotDir = config.home.homeDirectory;
-    history = {
-      path = "${config.home.homeDirectory}/.zsh_history";
-      size = 50000;
-      save = 10000;
-      extended = true;
-      expireDuplicatesFirst = true;
-      ignoreDups = true;
-      ignoreSpace = true;
-      share = true;
-    };
-    setOptions = [ "HIST_VERIFY" ];
+    history.path = "${config.home.homeDirectory}/.zsh_history";
     oh-my-zsh.theme = "robbyrussell";
 
     envExtra = ''
