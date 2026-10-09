@@ -4,7 +4,7 @@ let
 in
 {
   flake.darwinConfigurations.macbook = inputs.nix-darwin.lib.darwinSystem {
-    modules = [ config.flake.modules.darwin.macbook ];
+    modules = [ darwin.macbook ];
   };
 
   flake.modules.darwin.macbook = {

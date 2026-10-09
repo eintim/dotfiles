@@ -4,7 +4,7 @@ let
 in
 {
   flake.nixosConfigurations.xps13 = inputs.nixpkgs.lib.nixosSystem {
-    modules = [ config.flake.modules.nixos.xps13 ];
+    modules = [ nixos.xps13 ];
   };
 
   flake.modules.nixos.xps13 =

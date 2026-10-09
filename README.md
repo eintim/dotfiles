@@ -10,14 +10,29 @@ therefore updates the matching user environment as well.
 
 ## Layout
 
-```text
-hosts/        Concrete machines, hardware and user composition
-modules/home/ Reusable Home Manager features
-modules/nixos Reusable NixOS features
-modules/darwin Reusable nix-darwin features
-modules/shared Modules for both NixOS and nix-darwin
-templates/    Flake templates
+The flake follows the [dendritic pattern](https://github.com/mightyiam/dendritic):
+every file under `modules/` is a [flake-parts](https://flake.parts) module,
+imported automatically by [import-tree](https://github.com/vic/import-tree).
+Each file is one feature and configures every class it touches, for example
+`shell.nix` sets up zsh for both NixOS and Home Manager:
+
+```nix
+{
+  flake.modules.nixos.shell = { pkgs, ... }: { users.defaultUserShell = pkgs.zsh; };
+  flake.modules.homeManager.shell = { programs.zsh.enable = true; };
+}
 ```
+
+```text
+modules/        Features, one per file
+modules/hosts/  Machines: hardware, users and the features they import
+templates/      Flake templates
+```
+
+Hosts pick features from `config.flake.modules.<class>`. Files can be
+moved or renamed freely; paths starting with `_` are skipped by
+import-tree and imported explicitly (e.g. the generated hardware
+configuration).
 
 ## Rebuild
 
