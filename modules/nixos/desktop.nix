@@ -34,15 +34,12 @@
     wireplumber.enable = true;
   };
 
-  programs.hyprland.enable = true;
   programs.dconf.enable = true;
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
   };
-
-  security.pam.services.swaylock = { };
 
   environment.systemPackages = with pkgs; [
     firefox
