@@ -15,7 +15,6 @@
     luarocks
     nasm
     ninja
-    starship
     tio
   ];
 
