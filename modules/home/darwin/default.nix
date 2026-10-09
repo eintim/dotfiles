@@ -55,8 +55,6 @@
         fpath+=(/opt/homebrew/share/zsh/site-functions)
       fi
 
-      # CLIs pip-installed into the python.org framework build.
-      path+=(/Library/Frameworks/Python.framework/Versions/3.13/bin)
       path+=("$HOME/.antigravity/antigravity/bin")
     '';
 
