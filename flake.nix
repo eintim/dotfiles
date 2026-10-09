@@ -44,10 +44,6 @@
         ];
       };
 
-      packages.x86_64-linux.sddm-theme = import ./packages/sddm-theme.nix {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      };
-
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
     };
 }

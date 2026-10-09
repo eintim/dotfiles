@@ -15,7 +15,6 @@ hosts/        Concrete machines, hardware and user composition
 modules/home/ Reusable Home Manager features
 modules/nixos Reusable NixOS features
 modules/darwin Reusable nix-darwin features
-packages/     Local packages exposed by the flake
 ```
 
 ## Rebuild
