@@ -16,7 +16,7 @@
   programs.zsh = {
     shellAliases = {
       ll = "ls -l";
-      update = "sudo nixos-rebuild switch";
+      update = "sudo nixos-rebuild switch --flake ~/dev/dotfiles#xps13";
     };
     history = {
       size = 10000;
