@@ -18,13 +18,6 @@
     brews = [
       "herdr"
       "mole"
-
-      # Keep language runtimes and their version managers together until
-      # they are migrated to project-specific Nix development shells.
-      "node@24"
-      "openjdk@21"
-      "pyenv"
-      "python@3.13"
       "qt"
 
       # macOS-specific helpers without an equivalent in the current setup.

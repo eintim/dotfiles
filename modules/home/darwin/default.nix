@@ -13,9 +13,23 @@
     nasm
     ninja
     opencode
-    pnpm
     tio
+
+    # Global language runtimes. Projects pin their own versions in a flake
+    # dev shell (see templates/devshell) or with uv.
+    nodejs_24
+    pnpm
+    python313
+    uv
   ];
+
+  programs.java = {
+    enable = true;
+    package = pkgs.jdk21;
+  };
+
+  # Global npm installs go to ~/.local instead of the read-only Nix store.
+  home.sessionVariables.NPM_CONFIG_PREFIX = "${config.home.homeDirectory}/.local";
 
   programs.zsh = {
     dotDir = config.home.homeDirectory;
@@ -47,24 +61,8 @@
     '';
 
     initContent = ''
-      export NVM_DIR="$HOME/.nvm"
-      if [[ -s "$NVM_DIR/nvm.sh" ]]; then
-        source "$NVM_DIR/nvm.sh"
-      fi
-      if [[ -s "$NVM_DIR/bash_completion" ]]; then
-        source "$NVM_DIR/bash_completion"
-      fi
-
       if (( $+commands[ng] )); then
         source <(ng completion script)
-      fi
-
-      export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
-
-      export PYENV_ROOT="$HOME/.pyenv"
-      export PATH="$PYENV_ROOT/bin:$PATH"
-      if (( $+commands[pyenv] )); then
-        eval "$(pyenv init --path)"
       fi
     '';
   };
