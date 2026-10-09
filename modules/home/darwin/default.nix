@@ -9,8 +9,10 @@
     cmake
     gource
     luarocks
+    mkcert
     nasm
     ninja
+    pnpm
     tio
   ];
 

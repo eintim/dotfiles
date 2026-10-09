@@ -17,14 +17,12 @@
 
     brews = [
       "herdr"
-      "mkcert"
       "mole"
 
       # Keep language runtimes and their version managers together until
       # they are migrated to project-specific Nix development shells.
       "node@24"
       "openjdk@21"
-      "pnpm"
       "pyenv"
       "python@3.13"
       "qt"
