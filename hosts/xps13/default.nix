@@ -53,7 +53,6 @@
       "networkmanager"
       "wheel"
       "dialout"
-      "docker"
       "adbusers"
     ];
   };
