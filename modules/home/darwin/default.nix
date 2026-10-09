@@ -9,26 +9,14 @@
     autoconf-archive
     automake
     bash
-    btop
     ccache
     cmake
-    fastfetch
-    gh
     gource
-    jujutsu
-    lazygit
     luarocks
-    mpv
     nasm
     ninja
-    p7zip
-    ripgrep
     starship
     tio
-    jq
-    tmux
-    typst
-    unar
   ];
 
   programs.zsh = {

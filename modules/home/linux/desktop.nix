@@ -5,7 +5,6 @@
     distrobox
     webcord
     element-desktop
-    mpv
     streamlink
     zsh
     libreoffice

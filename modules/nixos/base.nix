@@ -34,7 +34,6 @@
     wget
     git
     zsh
-    fastfetch
   ];
 
   programs.zsh.enable = true;
