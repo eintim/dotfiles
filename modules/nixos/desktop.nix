@@ -6,11 +6,6 @@
       layout = "de";
       variant = "";
     };
-    windowManager = {
-      bspwm.enable = true;
-      i3.enable = true;
-      dwm.enable = true;
-    };
   };
 
   services.displayManager.gdm.enable = true;
