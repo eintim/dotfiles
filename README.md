@@ -16,6 +16,7 @@ modules/home/ Reusable Home Manager features
 modules/nixos Reusable NixOS features
 modules/darwin Reusable nix-darwin features
 modules/shared Modules for both NixOS and nix-darwin
+templates/    Flake templates
 ```
 
 ## Rebuild
@@ -27,3 +28,17 @@ modules/shared Modules for both NixOS and nix-darwin
 
 Omit `switch` to only build. Run `./update.sh` to update all flake inputs.
 
+## Project dev shells
+
+Language runtimes installed globally are only defaults. A project that
+needs specific tool versions gets its own dev shell, which direnv loads
+when entering the directory:
+
+```console
+cd ~/dev/my-project
+nix flake init -t ~/dev/dotfiles#devshell
+direnv allow
+```
+
+Edit the `packages` list in the generated `flake.nix` as needed. Python
+projects can use `uv` instead (`uv python pin 3.12`, `uv sync`).
