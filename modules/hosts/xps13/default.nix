@@ -1,4 +1,7 @@
 { inputs, config, ... }:
+let
+  inherit (config.flake.modules) homeManager;
+in
 {
   flake.nixosConfigurations.xps13 = inputs.nixpkgs.lib.nixosSystem {
     modules = [ config.flake.modules.nixos.xps13 ];
@@ -87,9 +90,13 @@
         { config, ... }:
         {
           imports = [
-            ../../../legacy/home/common
+            homeManager.cli
+            homeManager.git
+            homeManager.nh
+            ../../../legacy/home/common/shell.nix
+            homeManager.neovim
             ../../../legacy/home/linux/desktop.nix
-            ../../../legacy/home/programs/vscode.nix
+            homeManager.vscode
           ];
 
           home.username = "tim";

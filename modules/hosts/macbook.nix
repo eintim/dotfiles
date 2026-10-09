@@ -1,4 +1,7 @@
 { inputs, config, ... }:
+let
+  inherit (config.flake.modules) homeManager;
+in
 {
   flake.darwinConfigurations.macbook = inputs.nix-darwin.lib.darwinSystem {
     modules = [ config.flake.modules.darwin.macbook ];
@@ -21,7 +24,11 @@
       { config, ... }:
       {
         imports = [
-          ../../legacy/home/common
+          homeManager.cli
+          homeManager.git
+          homeManager.nh
+          ../../legacy/home/common/shell.nix
+          homeManager.neovim
           ../../legacy/home/darwin
         ];
 
