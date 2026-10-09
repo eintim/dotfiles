@@ -15,12 +15,6 @@
       cleanup = "uninstall";
     };
 
-    taps = [
-      "anomalyco/tap"
-      "charmbracelet/tap"
-      "jesseduffield/lazygit"
-    ];
-
     brews = [
       "herdr"
       "mkcert"
