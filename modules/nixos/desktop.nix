@@ -48,6 +48,4 @@
     nerd-fonts.symbols-only
     font-awesome
   ];
-
-  environment.sessionVariables.MOZ_DISABLE_RDD_SANDBOX = "1";
 }

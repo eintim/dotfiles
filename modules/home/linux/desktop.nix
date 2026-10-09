@@ -44,8 +44,6 @@
     style.package = pkgs.adwaita-qt;
   };
 
-  home.sessionVariables.MOZ_ENABLE_WAYLAND = 1;
-
   services.syncthing.enable = true;
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
