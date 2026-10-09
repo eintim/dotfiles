@@ -3,10 +3,10 @@
   imports = [
     inputs.nixos-hardware.nixosModules.dell-xps-13-9360
     ./hardware-configuration.nix
-    ../../modules/nixos/base.nix
-    ../../modules/nixos/desktop.nix
-    ../../modules/nixos/virtualization.nix
-    ../../modules/shared/home-manager.nix
+    ../../legacy/nixos/base.nix
+    ../../legacy/nixos/desktop.nix
+    ../../legacy/nixos/virtualization.nix
+    ../../legacy/shared/home-manager.nix
   ];
 
   nixpkgs.hostPlatform = "x86_64-linux";

@@ -1,8 +1,8 @@
 { config, ... }:
 {
   imports = [
-    ../../modules/home/common
-    ../../modules/home/darwin
+    ../../legacy/home/common
+    ../../legacy/home/darwin
   ];
 
   home.username = "eintim";

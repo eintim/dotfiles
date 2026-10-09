@@ -1,8 +1,8 @@
 { ... }:
 {
   imports = [
-    ../../modules/darwin/base.nix
-    ../../modules/shared/home-manager.nix
+    ../../legacy/darwin/base.nix
+    ../../legacy/shared/home-manager.nix
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";

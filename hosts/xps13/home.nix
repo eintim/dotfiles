@@ -1,9 +1,9 @@
 { config, ... }:
 {
   imports = [
-    ../../modules/home/common
-    ../../modules/home/linux/desktop.nix
-    ../../modules/home/programs/vscode.nix
+    ../../legacy/home/common
+    ../../legacy/home/linux/desktop.nix
+    ../../legacy/home/programs/vscode.nix
   ];
 
   home.username = "tim";
