@@ -6,7 +6,6 @@
     webcord
     element-desktop
     streamlink
-    zsh
     libreoffice
     prismlauncher
     ansible
@@ -17,7 +16,6 @@
     obsidian
     signal-desktop
     teamspeak6-client
-    android-tools
     qbittorrent
     platformio
     avrdude

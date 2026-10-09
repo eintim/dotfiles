@@ -33,7 +33,6 @@
   environment.systemPackages = with pkgs; [
     wget
     git
-    zsh
   ];
 
   programs.zsh.enable = true;
