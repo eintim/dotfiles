@@ -9,7 +9,11 @@ case "$target:$(uname -s)" in
     if [ "$action" = build ]; then
       exec nix build .#darwinConfigurations.macbook.system
     fi
-    exec sudo nix run .#darwin-rebuild -- switch --flake .#macbook
+    if command -v darwin-rebuild >/dev/null 2>&1; then
+      exec sudo darwin-rebuild switch --flake .#macbook
+    fi
+    # First install: darwin-rebuild is not on PATH yet.
+    exec sudo nix run github:nix-darwin/nix-darwin/master#darwin-rebuild -- switch --flake .#macbook
     ;;
   xps13:Linux)
     if [ "$action" = switch ]; then

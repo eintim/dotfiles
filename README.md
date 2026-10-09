@@ -22,7 +22,9 @@ dev-shells/   Development environments exposed by the flake
 ## Rebuild
 
 ```console
-sudo nixos-rebuild switch --flake .#xps13
-darwin-rebuild switch --flake .#macbook
+./apply-system.sh xps13 switch    # sudo nixos-rebuild switch --flake .#xps13
+./apply-system.sh macbook switch  # sudo darwin-rebuild switch --flake .#macbook
 ```
+
+Omit `switch` to only build. Run `./update.sh` to update all flake inputs.
 
