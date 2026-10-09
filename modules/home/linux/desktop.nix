@@ -44,8 +44,6 @@
   };
 
   services.syncthing.enable = true;
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
   programs.go.enable = true;
 
   xdg.configFile."mpv/mpv.conf".text = ''
