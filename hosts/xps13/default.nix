@@ -33,7 +33,6 @@
   };
 
   networking.firewall = {
-    allowedTCPPorts = [ 1883 ];
     checkReversePath = "loose";
     logReversePathDrops = true;
     extraCommands = ''
