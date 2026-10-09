@@ -3,7 +3,6 @@
   imports = [
     ../../modules/home/common
     ../../modules/home/linux/desktop.nix
-    ../../modules/home/programs/neovim.nix
     ../../modules/home/programs/vscode.nix
   ];
 

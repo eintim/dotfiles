@@ -1,9 +1,5 @@
 { config, pkgs, ... }:
 {
-  imports = [
-    ../programs/neovim.nix
-  ];
-
   home.packages = with pkgs; [
     autoconf
     autoconf-archive
