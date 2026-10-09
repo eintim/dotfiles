@@ -21,12 +21,23 @@ templates/    Flake templates
 
 ## Rebuild
 
+[nh](https://github.com/nix-community/nh) is installed on both machines
+and knows where this repository lives, so it works from any directory. It
+shows the package changes before switching.
+
 ```console
-./apply-system.sh xps13 switch    # sudo nixos-rebuild switch --flake .#xps13
-./apply-system.sh macbook switch  # sudo darwin-rebuild switch --flake .#macbook
+nh os switch            # xps13
+nh darwin switch        # macbook
+nh darwin switch --update   # update flake inputs, then switch
+nh darwin build         # build only
 ```
 
-Omit `switch` to only build. Run `./update.sh` to update all flake inputs.
+Before nh is installed, bootstrap with the plain commands:
+
+```console
+sudo nixos-rebuild switch --flake .#xps13
+sudo nix run github:nix-darwin/nix-darwin/master#darwin-rebuild -- switch --flake .#macbook
+```
 
 ## Project dev shells
 

@@ -13,7 +13,6 @@
   programs.home-manager.enable = true;
 
   programs.zsh = {
-    shellAliases.update = "sudo nixos-rebuild switch --flake ~/dev/dotfiles#xps13";
     history.path = "${config.xdg.dataHome}/zsh/history";
     oh-my-zsh.theme = "afowler";
   };
