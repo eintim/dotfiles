@@ -12,6 +12,7 @@
     mkcert
     nasm
     ninja
+    opencode
     pnpm
     tio
   ];
