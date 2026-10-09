@@ -2,6 +2,7 @@
 {
   imports = [
     ../../modules/darwin/base.nix
+    ../../modules/shared/home-manager.nix
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
@@ -10,9 +11,5 @@
 
   users.users.eintim.home = "/Users/eintim";
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users.eintim = ./home.nix;
-  };
+  home-manager.users.eintim = ./home.nix;
 }

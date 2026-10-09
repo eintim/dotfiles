@@ -6,6 +6,7 @@
     ../../modules/nixos/base.nix
     ../../modules/nixos/desktop.nix
     ../../modules/nixos/virtualization.nix
+    ../../modules/shared/home-manager.nix
   ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
@@ -78,11 +79,7 @@
     extraPackages = [ pkgs.intel-compute-runtime ];
   };
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users.tim = ./home.nix;
-  };
+  home-manager.users.tim = ./home.nix;
 
   system.stateVersion = "22.05";
 }
