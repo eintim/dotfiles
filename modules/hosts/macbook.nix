@@ -1,6 +1,6 @@
 { inputs, config, ... }:
 let
-  inherit (config.flake.modules) homeManager;
+  inherit (config.flake.modules) darwin homeManager;
 in
 {
   flake.darwinConfigurations.macbook = inputs.nix-darwin.lib.darwinSystem {
@@ -8,10 +8,11 @@ in
   };
 
   flake.modules.darwin.macbook = {
-    imports = [
-      inputs.home-manager.darwinModules.home-manager
-      ../../legacy/darwin/base.nix
-      ../../legacy/shared/home-manager.nix
+    imports = with darwin; [
+      home-manager
+      homebrew
+      macos
+      nix
     ];
 
     nixpkgs.hostPlatform = "aarch64-darwin";
@@ -23,20 +24,19 @@ in
     home-manager.users.eintim =
       { config, ... }:
       {
-        imports = [
-          homeManager.cli
-          homeManager.git
-          homeManager.nh
-          ../../legacy/home/common/shell.nix
-          homeManager.neovim
-          ../../legacy/home/darwin
+        imports = with homeManager; [
+          cli
+          git
+          home-manager
+          macos
+          neovim
+          nh
+          shell
         ];
 
         home.username = "eintim";
         home.homeDirectory = "/Users/eintim";
         home.stateVersion = "26.05";
-
-        programs.home-manager.enable = true;
 
         # The Mac's hostname does not match the configuration name.
         programs.nh.darwinFlake = "${config.programs.nh.flake}#macbook";

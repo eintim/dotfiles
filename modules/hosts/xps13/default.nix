@@ -1,6 +1,6 @@
 { inputs, config, ... }:
 let
-  inherit (config.flake.modules) homeManager;
+  inherit (config.flake.modules) nixos homeManager;
 in
 {
   flake.nixosConfigurations.xps13 = inputs.nixpkgs.lib.nixosSystem {
@@ -10,14 +10,17 @@ in
   flake.modules.nixos.xps13 =
     { pkgs, ... }:
     {
-      imports = [
-        inputs.home-manager.nixosModules.home-manager
+      imports = with nixos; [
         inputs.nixos-hardware.nixosModules.dell-xps-13-9360
         ./_hardware-configuration.nix
-        ../../../legacy/nixos/base.nix
-        ../../../legacy/nixos/desktop.nix
-        ../../../legacy/nixos/virtualization.nix
-        ../../../legacy/shared/home-manager.nix
+        cli
+        desktop
+        git
+        home-manager
+        locale
+        nix
+        shell
+        virtualization
       ];
 
       nixpkgs.hostPlatform = "x86_64-linux";
@@ -89,21 +92,20 @@ in
       home-manager.users.tim =
         { config, ... }:
         {
-          imports = [
-            homeManager.cli
-            homeManager.git
-            homeManager.nh
-            ../../../legacy/home/common/shell.nix
-            homeManager.neovim
-            ../../../legacy/home/linux/desktop.nix
-            homeManager.vscode
+          imports = with homeManager; [
+            cli
+            desktop
+            git
+            home-manager
+            neovim
+            nh
+            shell
+            vscode
           ];
 
           home.username = "tim";
           home.homeDirectory = "/home/tim";
           home.stateVersion = "23.05";
-
-          programs.home-manager.enable = true;
 
           programs.zsh = {
             history.path = "${config.xdg.dataHome}/zsh/history";
