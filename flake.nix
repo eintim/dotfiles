@@ -44,10 +44,6 @@
         ];
       };
 
-      devShells.x86_64-linux.r-gifski = import ./dev-shells/r-gifski.nix {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      };
-
       packages.x86_64-linux.sddm-theme = import ./packages/sddm-theme.nix {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
       };

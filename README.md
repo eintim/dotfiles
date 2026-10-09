@@ -16,7 +16,6 @@ modules/home/ Reusable Home Manager features
 modules/nixos Reusable NixOS features
 modules/darwin Reusable nix-darwin features
 packages/     Local packages exposed by the flake
-dev-shells/   Development environments exposed by the flake
 ```
 
 ## Rebuild
