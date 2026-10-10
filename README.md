@@ -24,10 +24,17 @@ Each file is one feature and configures every class it touches, for example
 ```
 
 ```text
-modules/        Features, one per file
-modules/hosts/  Machines: hardware, users and the features they import
-templates/      Flake templates
+modules/shared/  Features for both machines
+modules/darwin/  macOS-only features
+modules/nixos/   NixOS-only features
+modules/flake/   Flake plumbing: checks, formatter, templates
+modules/hosts/   Machines: hardware, users and the features they import
+templates/       Flake templates
 ```
+
+Folders only sort features by platform. A feature that applies to both
+machines stays a single file in `shared/`, even when it configures
+different classes on each.
 
 Hosts pick features from `config.flake.modules.<class>`. Files can be
 moved or renamed freely; paths starting with `_` are skipped by
