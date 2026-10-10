@@ -19,16 +19,34 @@
 
     nixpkgs.config.allowUnfree = true;
 
-    programs.nix-ld = {
-      enable = true;
-      libraries = [ ];
+    programs.nix-ld.enable = true;
+  };
+
+  flake.modules.darwin.nix =
+    { lib, pkgs, ... }:
+    {
+      # Determinate owns the Nix daemon and its configuration.
+      nix.enable = false;
+
+      nixpkgs.config.allowUnfree = true;
+
+      # Determinate collects unreferenced store paths on its own, but old
+      # generations stay GC roots. Prune them like nix.gc does on NixOS.
+      launchd.daemons.nh-clean.serviceConfig = {
+        ProgramArguments = [
+          (lib.getExe pkgs.nh)
+          "clean"
+          "all"
+          "--keep-since"
+          "14d"
+        ];
+        StartCalendarInterval = [
+          {
+            Weekday = 0;
+            Hour = 12;
+            Minute = 0;
+          }
+        ];
+      };
     };
-  };
-
-  flake.modules.darwin.nix = {
-    # Determinate owns the Nix daemon and its configuration.
-    nix.enable = false;
-
-    nixpkgs.config.allowUnfree = true;
-  };
 }

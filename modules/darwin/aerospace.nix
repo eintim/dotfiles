@@ -97,10 +97,6 @@ in
             "flatten-workspace-tree"
             "mode main"
           ];
-          f = [
-            "layout floating tiling"
-            "mode main"
-          ];
           backspace = [
             "close-all-windows-but-current"
             "mode main"

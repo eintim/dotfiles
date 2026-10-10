@@ -35,7 +35,6 @@
         "rar"
         "raycast"
         "stats"
-        "whisky"
       ];
     };
   };

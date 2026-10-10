@@ -67,7 +67,6 @@ in
           "networkmanager"
           "wheel"
           "dialout"
-          "adbusers"
         ];
       };
 
@@ -77,7 +76,6 @@ in
 
       services.udev = {
         packages = [
-          pkgs.platformio
           pkgs.platformio-core.udev
           pkgs.openocd
         ];

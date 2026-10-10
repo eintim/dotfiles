@@ -15,10 +15,6 @@
       services.displayManager.gdm.enable = true;
       services.desktopManager.gnome.enable = true;
       services.flatpak.enable = true;
-      services.devmon.enable = true;
-      services.udisks2.enable = true;
-      services.gvfs.enable = true;
-      services.blueman.enable = true;
       services.printing.enable = true;
 
       hardware.bluetooth.enable = true;
@@ -33,7 +29,6 @@
         wireplumber.enable = true;
       };
 
-      programs.dconf.enable = true;
       programs.steam = {
         enable = true;
         remotePlay.openFirewall = true;
@@ -103,8 +98,8 @@
 
       xdg.configFile."mpv/mpv.conf".text = ''
         hwdec=auto-safe
-        vo=gpu
-        profile=gpu-hq
+        vo=gpu-next
+        profile=high-quality
       '';
     };
 }

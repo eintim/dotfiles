@@ -4,6 +4,9 @@ let
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
+      # Move files that apps replaced with their own copy (e.g. Karabiner
+      # rewriting karabiner.json) aside instead of failing activation.
+      backupFileExtension = "hm-bak";
     };
   };
 in

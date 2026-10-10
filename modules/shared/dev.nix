@@ -31,10 +31,18 @@
 
       # Global npm installs go to ~/.local instead of the read-only Nix store.
       home.sessionVariables.NPM_CONFIG_PREFIX = "${config.home.homeDirectory}/.local";
+      home.sessionPath = [ "${config.home.homeDirectory}/.local/bin" ];
 
+      # Generating the completion starts Node, so cache it until ng changes.
       programs.zsh.initContent = ''
         if (( $+commands[ng] )); then
-          source <(ng completion script)
+          _ng_completion="${config.xdg.cacheHome}/zsh/ng-completion.zsh"
+          if [[ ! -s $_ng_completion || $commands[ng] -nt $_ng_completion ]]; then
+            mkdir -p "''${_ng_completion:h}"
+            ng completion script >| "$_ng_completion"
+          fi
+          source "$_ng_completion"
+          unset _ng_completion
         fi
       '';
     };
