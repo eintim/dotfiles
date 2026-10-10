@@ -73,8 +73,6 @@
       enableStealthMode = true;
     };
 
-    time.timeZone = "Europe/Berlin";
-
     # Touch ID for sudo, also inside tmux sessions.
     security.pam.services.sudo_local = {
       touchIdAuth = true;
@@ -85,36 +83,8 @@
   flake.modules.homeManager.macos =
     { config, pkgs, ... }:
     {
-      home.packages = with pkgs; [
-        autoconf
-        autoconf-archive
-        automake
-        bash
-        ccache
-        cmake
-        gource
-        luarocks
-        mkcert
-        nasm
-        ninja
-        opencode
-        tio
-
-        # Global language runtimes. Projects pin their own versions in a flake
-        # dev shell (see templates/devshell) or with uv.
-        nodejs_24
-        pnpm
-        python313
-        uv
-      ];
-
-      programs.java = {
-        enable = true;
-        package = pkgs.jdk21;
-      };
-
-      # Global npm installs go to ~/.local instead of the read-only Nix store.
-      home.sessionVariables.NPM_CONFIG_PREFIX = "${config.home.homeDirectory}/.local";
+      # macOS ships bash 3.2.
+      home.packages = [ pkgs.bash ];
 
       programs.zsh = {
         dotDir = config.home.homeDirectory;
@@ -141,12 +111,6 @@
           fi
 
           path+=("$HOME/.antigravity/antigravity/bin")
-        '';
-
-        initContent = ''
-          if (( $+commands[ng] )); then
-            source <(ng completion script)
-          fi
         '';
       };
     };

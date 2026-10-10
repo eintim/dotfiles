@@ -1,6 +1,11 @@
+let
+  timeZone = "Europe/Berlin";
+in
 {
+  flake.modules.darwin.locale.time = { inherit timeZone; };
+
   flake.modules.nixos.locale = {
-    time.timeZone = "Europe/Berlin";
+    time = { inherit timeZone; };
     i18n.defaultLocale = "en_US.utf8";
     i18n.extraLocaleSettings = {
       LC_ADDRESS = "de_DE.utf8";

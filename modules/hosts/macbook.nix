@@ -13,6 +13,7 @@ in
       home-manager
       homebrew
       karabiner
+      locale
       macos
       nix
     ];
@@ -29,6 +30,7 @@ in
         imports = with homeManager; [
           aerospace
           cli
+          dev
           git
           home-manager
           karabiner
