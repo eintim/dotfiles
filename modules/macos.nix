@@ -66,11 +66,6 @@
       };
     };
 
-    system.keyboard = {
-      enableKeyMapping = true;
-      remapCapsLockToEscape = true;
-    };
-
     system.startup.chime = false;
 
     networking.applicationFirewall = {

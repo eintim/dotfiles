@@ -9,8 +9,10 @@ in
 
   flake.modules.darwin.macbook = {
     imports = with darwin; [
+      aerospace
       home-manager
       homebrew
+      karabiner
       macos
       nix
     ];
@@ -25,9 +27,11 @@ in
       { config, ... }:
       {
         imports = with homeManager; [
+          aerospace
           cli
           git
           home-manager
+          karabiner
           macos
           neovim
           nh

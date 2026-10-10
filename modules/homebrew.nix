@@ -33,6 +33,7 @@
         "dotnet-sdk@8"
         "ghostty"
         "rar"
+        "raycast"
         "stats"
         "whisky"
       ];
