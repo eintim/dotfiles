@@ -28,6 +28,12 @@
       };
     };
 
+    # Ctrl+R searches history, Ctrl+T inserts a file path.
+    programs.fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;
