@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "anthropic-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791571549,
+        "narHash": "sha256-+UIqBnzyeIOvJSKYaDaE3GYPEpLw7qQqyUw5S971AfU=",
+        "owner": "anthropics",
+        "repo": "skills",
+        "rev": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anthropics",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -52,6 +68,22 @@
       "original": {
         "owner": "vic",
         "repo": "import-tree",
+        "type": "github"
+      }
+    },
+    "mattpocock-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792425100,
+        "narHash": "sha256-2FKfe3/Fwc4MmwBLa+d/oQW4/gtYIssdWapy2MPd39I=",
+        "owner": "mattpocock",
+        "repo": "skills",
+        "rev": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattpocock",
+        "repo": "skills",
         "type": "github"
       }
     },
@@ -113,14 +145,50 @@
         "type": "github"
       }
     },
+    "pstack-claude": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792710716,
+        "narHash": "sha256-PxD5vgXMTtwgxGP3wFyiSO8TcXh0xTJaym2+VpVf4LE=",
+        "owner": "michael-denyer",
+        "repo": "pstack-claude",
+        "rev": "356c6e0f978df729eb16f227d795f34d221c5aad",
+        "type": "github"
+      },
+      "original": {
+        "owner": "michael-denyer",
+        "repo": "pstack-claude",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "anthropic-skills": "anthropic-skills",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
+        "mattpocock-skills": "mattpocock-skills",
         "nix-darwin": "nix-darwin",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "pstack-claude": "pstack-claude",
+        "tstack": "tstack"
+      }
+    },
+    "tstack": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792895150,
+        "narHash": "sha256-XZL19Kq8sMKjgIUahJZuNgSz/N/Lx/u5aDYxhLl78Ag=",
+        "owner": "t3dotgg",
+        "repo": "tstack",
+        "rev": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "t3dotgg",
+        "repo": "tstack",
+        "type": "github"
       }
     }
   },

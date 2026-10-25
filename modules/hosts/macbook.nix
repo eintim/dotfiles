@@ -29,6 +29,7 @@ in
       {
         imports = with homeManager; [
           aerospace
+          agent-skills
           cli
           dev
           git

@@ -14,6 +14,7 @@
         nasm
         ninja
         opencode
+        shellcheck
         tio
 
         # Global language runtimes. Projects pin their own versions in a flake

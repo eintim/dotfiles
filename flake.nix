@@ -17,6 +17,19 @@
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
 
     import-tree.url = "github:vic/import-tree";
+
+    # Skill sources for modules/shared/agent-skills.nix.
+    anthropic-skills.url = "github:anthropics/skills";
+    anthropic-skills.flake = false;
+
+    mattpocock-skills.url = "github:mattpocock/skills";
+    mattpocock-skills.flake = false;
+
+    pstack-claude.url = "github:michael-denyer/pstack-claude";
+    pstack-claude.flake = false;
+
+    tstack.url = "github:t3dotgg/tstack";
+    tstack.flake = false;
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
