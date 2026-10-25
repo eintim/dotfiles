@@ -43,11 +43,16 @@
         NSAutomaticSpellingCorrectionEnabled = false;
         NSDocumentSaveNewDocumentsToCloud = false;
         NSNavPanelExpandedStateForSaveMode = true;
+        # Ctrl+Cmd drag moves a window from anywhere inside it.
+        NSWindowShouldDragOnGesture = true;
       };
 
       trackpad = {
         Clicking = true;
         TrackpadThreeFingerDrag = true;
+        # Four-finger swipes switch Spaces. Three fingers are taken by
+        # three-finger drag.
+        TrackpadFourFingerHorizSwipeGesture = 2;
       };
 
       screencapture.disable-shadow = true;

@@ -9,13 +9,13 @@ in
 
   flake.modules.darwin.macbook = {
     imports = with darwin; [
-      aerospace
       home-manager
       homebrew
       karabiner
       locale
       macos
       nix
+      rectangle
     ];
 
     nixpkgs.hostPlatform = "aarch64-darwin";
@@ -28,7 +28,6 @@ in
       { config, ... }:
       {
         imports = with homeManager; [
-          aerospace
           agent-skills
           cli
           dev
