@@ -84,6 +84,10 @@ let
         ];
       };
 
+      # Mount /home before users are created, so home directories land on the
+      # volume instead of underneath it.
+      fileSystems."/home".neededForBoot = true;
+
       networking.useNetworkd = true;
       systemd.network.networks."10-eth" = {
         matchConfig.MACAddress = mac;
