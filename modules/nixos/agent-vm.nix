@@ -146,6 +146,13 @@ let
             codex
           ];
 
+          # Home Manager owns the git config, so `gh auth setup-git` can't
+          # write the credential helper. Declare it here instead.
+          programs.gh = {
+            enable = true;
+            gitCredentialHelper.enable = true;
+          };
+
           home.username = "agent";
           home.homeDirectory = "/home/agent";
           home.stateVersion = "26.05";
