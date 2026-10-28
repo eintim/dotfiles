@@ -1,8 +1,9 @@
 # Nix configuration
 
-This flake manages two machines:
+This flake manages three machines:
 
 - `xps13`: NixOS on `x86_64-linux`
+- `nuc`: headless NixOS server on `x86_64-linux`
 - `macbook`: nix-darwin on `aarch64-darwin`
 
 Home Manager is integrated into both system configurations. A system rebuild
@@ -48,7 +49,7 @@ and knows where this repository lives, so it works from any directory. It
 shows the package changes before switching.
 
 ```console
-nh os switch            # xps13
+nh os switch            # xps13, nuc
 nh darwin switch        # macbook
 nh darwin switch --update   # update flake inputs, then switch
 nh darwin build         # build only
@@ -57,7 +58,7 @@ nh darwin build         # build only
 Before nh is installed, bootstrap with the plain commands:
 
 ```console
-sudo nixos-rebuild switch --flake .#xps13
+sudo nixos-rebuild switch --flake .#xps13   # or .#nuc
 sudo nix run github:nix-darwin/nix-darwin/master#darwin-rebuild -- switch --flake .#macbook
 ```
 
