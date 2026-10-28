@@ -10,6 +10,7 @@ in
   flake.modules.nixos.nuc = {
     imports = with nixos; [
       ./_hardware-configuration.nix
+      agent-vm
       cli
       git
       home-manager

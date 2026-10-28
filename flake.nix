@@ -18,6 +18,9 @@
 
     import-tree.url = "github:vic/import-tree";
 
+    microvm.url = "github:microvm-nix/microvm.nix";
+    microvm.inputs.nixpkgs.follows = "nixpkgs";
+
     # Skill sources for modules/shared/agent-skills.nix.
     anthropic-skills.url = "github:anthropics/skills";
     anthropic-skills.flake = false;
