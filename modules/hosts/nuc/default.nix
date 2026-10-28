@@ -16,6 +16,7 @@ in
       locale
       nix
       shell
+      tailscale
     ];
 
     networking.hostName = "nuc";
