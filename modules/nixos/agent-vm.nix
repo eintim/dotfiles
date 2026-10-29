@@ -18,7 +18,8 @@ let
   # tailnet's CGNAT range.
   blockedRanges = "{ 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 100.64.0.0/10, 169.254.0.0/16 }";
 
-  # Global instructions for Claude Code (CLAUDE.md) and Codex (AGENTS.md).
+  # Global instructions for Claude Code (CLAUDE.md), Codex and opencode
+  # (AGENTS.md).
   agentInstructions = ''
     # Environment
 
@@ -188,6 +189,9 @@ let
 
           home.file.".claude/CLAUDE.md".text = agentInstructions;
           home.file.".codex/AGENTS.md".text = agentInstructions;
+          # opencode installs through the dev module and allows all tools by
+          # default, so it only needs the instructions.
+          xdg.configFile."opencode/AGENTS.md".text = agentInstructions;
 
           home.packages = with pkgs; [
             claude-code
