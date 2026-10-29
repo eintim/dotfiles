@@ -18,6 +18,39 @@ let
   # tailnet's CGNAT range.
   blockedRanges = "{ 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 100.64.0.0/10, 169.254.0.0/16 }";
 
+  # Global instructions for Claude Code (CLAUDE.md) and Codex (AGENTS.md).
+  agentInstructions = ''
+    # Environment
+
+    You run as `agent` in a disposable NixOS microVM built as a sandbox for
+    you. Act without asking for approval; the VM boundary is the safety net.
+
+    ## Getting tools
+
+    NixOS has no apt and you have no root. Get tools through Nix:
+
+    - One command: `nix shell nixpkgs#<pkg> -c <cmd>`. Find names with
+      `nix search nixpkgs <name>`.
+    - A repo with a `flake.nix`: run inside its dev shell with
+      `nix develop -c <cmd>`, or `direnv allow` once to load it on `cd`.
+    - Node: `npm install -g` installs into `~/.local`, which is on PATH.
+      Python: use `uv`.
+    - Prebuilt Linux binaries (from npm, pip or downloads) run as-is.
+
+    ## Limits
+
+    - Only `/home` persists. Packages from `nix shell` are fetched again
+      after a VM restart. Keep repos in `~/dev`.
+    - Network reaches the public internet only. The LAN, the tailnet and the
+      host are blocked by the firewall.
+    - 3 vCPUs and about 5 GB RAM on an old CPU. Run one build or test suite
+      at a time, and prefer targeted tests over full suites.
+
+    ## GitHub
+
+    `gh` is logged in, and git uses it for HTTPS. Clone with https URLs.
+  '';
+
   guest =
     { lib, pkgs, ... }:
     {
@@ -101,6 +134,18 @@ let
 
       zramSwap.enable = true;
 
+      # The VM is the sandbox, so agents run without approval prompts. These
+      # system-level files sit below each tool's user config, which stays
+      # writable.
+      environment.etc."claude-code/managed-settings.json".text = builtins.toJSON {
+        permissions.defaultMode = "bypassPermissions";
+        skipDangerousModePermissionPrompt = true;
+      };
+      environment.etc."codex/config.toml".text = ''
+        approval_policy = "never"
+        sandbox_mode = "danger-full-access"
+      '';
+
       networking.firewall.allowedTCPPorts = [ t3Port ];
 
       services.openssh = {
@@ -140,6 +185,9 @@ let
             neovim
             shell
           ];
+
+          home.file.".claude/CLAUDE.md".text = agentInstructions;
+          home.file.".codex/AGENTS.md".text = agentInstructions;
 
           home.packages = with pkgs; [
             claude-code
