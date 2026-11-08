@@ -24,6 +24,8 @@
         ]
         ++ skillsFrom "${inputs.pstack-claude}/plugins/pstack/skills" [
           "blast-radius"
+          "bro"
+          "in-your-own-words"
           "interrogate"
           "technical-writing"
           # Applied by technical-writing and blast-radius.
